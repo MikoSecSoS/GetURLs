@@ -43,7 +43,9 @@ git clone https://github.com/MikoSecSoS/GetURLs.git
 - Use: python3 removeRepeat.py path
 - python3 removeRepeat.py *.txt
 
+## Digression
 
+因为Miko是lazy的,所以还有很多搜索引擎的爬虫的没写(其实之前写了一些的,不过被万恶的手残rm掉了.
 
 ## Author
 
