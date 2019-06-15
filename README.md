@@ -23,7 +23,7 @@
 ## Install
 
 ```sh
-git clone 
+git clone https://github.com/MikoSecSoS/GetURLs.git
 ```
 
 ## Files
