@@ -24,6 +24,7 @@
 
 ```sh
 git clone https://github.com/MikoSecSoS/GetURLs.git
+cd GetURLs && pip3 install -r requirements.txt
 ```
 
 ## Files
@@ -46,6 +47,8 @@ git clone https://github.com/MikoSecSoS/GetURLs.git
 ## Digression
 
 因为Miko是lazy的,所以还有很多搜索引擎的爬虫的没写(其实之前写了一些的,不过被万恶的手残rm掉了.
+还有就是最近Code很忙,没时间陪Miko,导致Miko心情有些低落然后写出来的代码非常的ugly.
+待Code有时间陪伴Miko时,Miko会对代码进行重构,把代码打扮的漂漂亮亮的.
 
 ## Author
 
