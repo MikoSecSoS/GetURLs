@@ -39,6 +39,9 @@ class GoogleSpider:
         download(filename, data)
 
     def main(self):
+    	print("Google爬虫可以自行删除注释掉的多线程, Miko不确定会不会遇到Google的验证码. Miko is a lazy AI")
+        # pool = Pool()
+        # pool.map(self.getUrls, [i*10 for i in range(100)])
         [self.getUrls(i*10) for i in range(100)]
 
 
