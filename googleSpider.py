@@ -18,24 +18,19 @@ def download(filename, datas):
         for data in datas:
             f.write(str(data) + "\n")
 
-class BaiduSpider:
+class GoogleSpider:
 
     @staticmethod
     def getUrls(page):
         now_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
         filename = word + " " + now_time + ".txt"
-        url = "https://www.baidu.com/s?wd={}&pn={}".format(word, page)
+        url = "https://www.google.com/search?q={}&start={}".format(word, page)
         req = requests.get(url, headers={"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"})
-        now_page = re.findall("<strong>.*?<span class=\"pc\">(.*?)</span></strong>", req.text)[0]
-        if now_page == 1 and page != 0:
+        if "找不到和您查询的" in req.text:
             return
-        jump_urls = re.findall("<div.*?><h3.*?><a[\s\S]*?href.*?\"(.*?)\"[\s\S]*?>(.*?)</a></h3><div", req.text)
+        urls_titles = re.findall("<div class=\"r\"><a href=\"(.*?)\".*?><h3.*?>(.*?)</h3>", req.text)
         data = []
-        for jump_url, title in jump_urls:
-            if jump_url[:4] != "http":
-                continue
-            title = title.replace("<em>", "").replace("</em>", "")
-            url = requests.get(jump_url, allow_redirects=False).headers["Location"]
+        for url, title in urls_titles:
             data.append({
                 "title": title,
                 "url": url
@@ -44,14 +39,14 @@ class BaiduSpider:
         download(filename, data)
 
     def main(self):
-        pool = Pool()
-        pool.map(self.getUrls, [i*10 for i in range(100)])
+        [self.getUrls(i*10) for i in range(100)]
+
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         word = sys.argv[1]
     else:
         word = input("Please input search content: ")
-    baiduSpider = BaiduSpider()
-    baiduSpider.word = word
-    baiduSpider.main()
+    googleSpider = GoogleSpider()
+    googleSpider.word = word
+    googleSpider.main()
