@@ -27,8 +27,8 @@ class BaiduSpider:
         url = "https://www.baidu.com/s?wd={}&pn={}".format(word, page)
         req = requests.get(url, headers={"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"})
         now_page = re.findall("<strong>.*?<span class=\"pc\">(.*?)</span></strong>", req.text)[0]
-        if now_page != page:
-            return
+        if (int(now_page)-1)*10 != page:
+                return
         jump_urls = re.findall("<div.*?><h3.*?><a[\s\S]*?href.*?\"(.*?)\"[\s\S]*?>(.*?)</a></h3><div", req.text)
         data = []
         for jump_url, title in jump_urls:
