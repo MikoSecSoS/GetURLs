@@ -31,13 +31,19 @@ class So:
         url = "https://www.so.com/s?q={}&pn={}".format(word, page)
         req = requests.get(url, headers=hd)
         if page != 1:
-        	now_page = re.findall("</a><strong>(.*?)</strong>", req.text)[0]
-	        if int(now_page) != page:
-	        	return
-        urls_titles = re.findall("<h3  class=\"res-title\"><a href=\"(.*?)\".*?>(.*?)</a></h3>", req.text)
+            now_page = re.findall("</a><strong>(.*?)</strong>", req.text)[0]
+            if int(now_page) != page:
+                return
+        jump_urls = re.findall("<h3  class=\"res-title\"><a href=\"(.*?)\".*?>(.*?)</a></h3>", req.text)
         data = []
-        for url, title in urls_titles:
+        for jump_url, title in jump_urls:
+            if jump_url[:4] != "http":
+                continue
             title = title.replace("<em>", "").replace("</em>", "")
+            try:
+                url = re.findall("<script>window.location.replace\(\"(.*?)\"\)</script>", requests.get(jump_url).text)[0]
+            except ValueError:
+                url = jump_url
             data.append({
                 "title": title,
                 "url": url
