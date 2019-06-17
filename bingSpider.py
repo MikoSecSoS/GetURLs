@@ -35,11 +35,9 @@ class BingSpider:
         url = "https://cn.bing.com/search?q={}&ensearch=1&first={}".format(word, page)
         req = requests.get(url, headers=hd)
         if "There are no results for" in req.text:
-            print("There are not result for")
             return
         urls_titles = re.findall("<h2><a.*?href=\"(.*?)\".*?>(.*?)</a></h2>", req.text)
         data = []
-        print(23333, urls_titles)
         for url, title in urls_titles:
             title = title.replace("<strong>", "").replace("</strong>", "")
             data.append({
