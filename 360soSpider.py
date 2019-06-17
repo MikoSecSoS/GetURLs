@@ -22,7 +22,7 @@ def download(filename, datas):
         for data in datas:
             f.write(str(data) + "\n")
 
-class BingSpider:
+class So:
 
     @staticmethod
     def getUrls(page):
@@ -59,6 +59,6 @@ if __name__ == "__main__":
         word = sys.argv[1]
     else:
         word = input("Please input search content: ")
-    bingSpider = BingSpider()
-    bingSpider.word = word
-    bingSpider.main()
+    so = So()
+    so.word = word
+    so.main()
