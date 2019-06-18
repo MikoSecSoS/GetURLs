@@ -11,6 +11,7 @@ import requests
 from multiprocessing import Pool
 
 def download(filename, datas):
+    filename = filename.replace("/", "_")
     if not os.path.exists(filename):
         f = open(filename, "w")
         f.close()
@@ -30,6 +31,8 @@ class So:
         filename = word + " " + now_time + ".txt"
         url = "https://www.so.com/s?q={}&pn={}".format(word, page)
         req = requests.get(url, headers=hd)
+        if "抱歉，未找到和" in req.text:
+            return
         if page != 1:
             now_page = re.findall("</a><strong>(.*?)</strong>", req.text)[0]
             if int(now_page) != page:
@@ -42,7 +45,7 @@ class So:
             title = title.replace("<em>", "").replace("</em>", "")
             try:
                 url = re.findall("<script>window.location.replace\(\"(.*?)\"\)</script>", requests.get(jump_url).text)[0]
-            except ValueError:
+            except IndexError:
                 url = jump_url
             data.append({
                 "title": title,

@@ -11,6 +11,7 @@ import requests
 from multiprocessing import Pool
 
 def download(filename, datas):
+    filename = filename.replace("/", "_")
     if not os.path.exists(filename):
         f = open(filename, "w")
         f.close()
