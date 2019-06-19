@@ -51,6 +51,8 @@ class So:
         download(filename, data)
 
     def main(self):
+        print("SouGou会遇到验证码，可以去自己写个验证码识别，或者整个代理池．"
+              "再或者在代码里加上Download验证码然后人眼识别，人肉输入．然后继续爬．. Miko is a lazy AI")
         pool = Pool()
         pool.map(self.getUrls, [i for i in range(1, 101)])
 
