@@ -25,16 +25,15 @@ class So:
     def getUrls(page):
         now_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
         hd = {
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
+            "Cookie": "SUID=2BCF2670AF67900A000000005D072FAF; IPLOC=CN3715; ABTEST=7|1560957931|v17; SUV=1560958038470531; browerV=3; osV=3; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; SNUID=09030E58282DAC86FF68339C28997D16; ISSW=1; sst0=548; sct=3; taspeed=taspeedexist; pgv_pvi=7160519680; pgv_si=s3417294848; ld=3kllllllll2NjO5ZlllllV13QFtllllltjYraklllxllllll9Zlll5@@@@@@@@@@",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"
         }
         filename = word + " " + now_time + ".txt"
         url = "https://www.sogou.com/web?query={}&page={}".format(word, page)
         req = requests.get(url, headers=hd)
-        if page != 1:
-            now_page = re.findall("<span>(\d+)</span>", req.text)[0]
-            if int(now_page) != page:
-                return
+        now_page = re.findall("<div class=\"p\".*?>.*?<span>(\d+)</span>", req.text)[0]
+        if int(now_page) != page:
+            return
         jump_urls = re.findall("<a target=\"_blank\" href=\"(.*?)\".*?cacheStrategy=\"qcr:-1\">(.*?)</a>", req.text)
         data = []
         for jump_url, title in jump_urls:
