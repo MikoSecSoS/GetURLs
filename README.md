@@ -44,7 +44,7 @@ cd GetURLs && pip3 install -r requirements.txt
 - Use: python3 removeRepeat.py path
 - python3 removeRepeat.py *.txt
 
-## Digression
+## Other
 
 因为Miko是lazy的,所以还有很多搜索引擎的爬虫的没写(其实之前写了一些的,不过被万恶的手残rm掉了.
 
