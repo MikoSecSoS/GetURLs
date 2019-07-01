@@ -52,6 +52,10 @@ cd GetURLs && pip3 install -r requirements.txt
 
 待Code有时间陪伴Miko时,Miko会对代码进行重构,把代码打扮的漂漂亮亮的.
 
+另外如果你使用的Windows系统可能会出现一些玄学异常，请自行修改代码．
+
+如果您是Linux玩家可以正常使用．
+
 ## Author
 
 👤 **MikoAI**
