@@ -4,14 +4,13 @@
 import os
 import sys
 import glob
-import time
 
 def formatUrls(path):
     if not os.path.exists("urls.txt"):
         file = open("urls.txt", "w")
         file.close()
     if os.path.exists(path):
-        file = open(path, "r")
+        file = open(path, "r", encoding="utf-8")
         with open("urls.txt", "a") as f:
             for line in file.readlines():
                 url = line[line.index("'url': '")+8:-3]
